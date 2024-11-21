@@ -129,3 +129,12 @@ Please provide up to 3 sentences for each suggestion. Additional content in your
 ### Best Practices
 * Dockerfile uses an appropriate base image for the application being deployed. Complex commands in the Dockerfile include a comment describing what it is doing.
 * The Docker images use semantic versioning with three numbers separated by dots, e.g. `1.2.1` and  versioning is visible in the  screenshot. See [Semantic Versioning](https://semver.org/) for more details.
+
+
+### Solution to help an experienced software developer understand the technologies and tools
+1. Whenever you push a commit to a main branch, the Github will sent an request to AWS CodeBuild.
+2. AWS CodeBuild automaticlly build the image base on what you change.
+3. AWS CodeBuild push the image to AWS ECR after build the image 
+4. Check the newest tag of image in the AWS ECR
+5. Run the command `kubectl set image deployment/my-app my-app=<AWS_ACCOUNT_ID>.dkr.ecr.$AWS_REGION.amazonaws.com/my-app:$LATEST_IMAGE_TAG --record` to apply new image to your deployment.
+6. Verify your deployment apply new image with command `kubectl describe deployment your-deployment`
